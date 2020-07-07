@@ -22,6 +22,7 @@ cat >$1/.lando.yml <<EOL
 name: $(basename "$1")
 recipe: lemp
 config:
+  php: "7.4"
   webroot: public
   database: mariadb
 
