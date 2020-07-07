@@ -23,6 +23,7 @@ name: $(basename "$1")
 recipe: lemp
 config:
   webroot: public
+  database: mariadb
 
 services:
   appserver:
