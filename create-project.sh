@@ -14,9 +14,7 @@ docker run --rm -it \
     -u $(id -u):$(id -g) \  
     -v $(cd "$1" && pwd):/app \
     -v ${COMPOSER_HOME:-${HOME}/.composer}:/composer \  
-    -v ${COMPOSER_CACHE_DIR:-$HOME/.cache/composer}:/composer_cache \ 
     -e COMPOSER_HOME=/composer \
-    -e COMPOSER_CACHE_DIR=/composer_cache \
     composer create-project symfony/skeleton .
 [[ $? -ne 0 ]] && exit 1
 
