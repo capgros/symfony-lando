@@ -11,10 +11,12 @@ if [[ ! -d $1 ]] ; then
 fi
 
 docker run --rm -it \
-    -u $(id -u):$(id -g) \
-    -v $(cd "$1" && pwd):/app \
-    -v ${COMPOSER_HOME:-${HOME}/.composer}:/composer \
+    -u $(id -u):$(id -g) \  # Ejecuta como el usuario actual
+    -v $(cd "$1" && pwd):/app \  # Monta el directorio proporcionado para la app como /app en el contenedor
+    -v ${COMPOSER_HOME:-${HOME}/.composer}:/composer \  # Establece la variable COMPOSER_HOME al directorio Home/.composer del usuario de docker si no esta ya establecida y la monta en /composer dentro del contenedor
+    -v ${COMPOSER_CACHE_DIR:-$HOME/.cache/composer}:/composer_cache \ # Establece la variable COMPOSER_CACHE al directorio Home/.cache/composer del usuario de docker si no esta ya establecida yla monta en /composer_cache dentro del contenedor
     -e COMPOSER_HOME=/composer \
+    -e COMPOSER_CACHE_DIR=//composer_cache \
     composer create-project symfony/skeleton .
 [[ $? -ne 0 ]] && exit 1
 
