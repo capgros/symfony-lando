@@ -16,7 +16,7 @@ docker run --rm -it \
     -v ${COMPOSER_HOME:-${HOME}/.composer}:/composer \  # Establece la variable COMPOSER_HOME al directorio Home/.composer del usuario de docker si no esta ya establecida y la monta en /composer dentro del contenedor
     -v ${COMPOSER_CACHE_DIR:-$HOME/.cache/composer}:/composer_cache \ # Establece la variable COMPOSER_CACHE al directorio Home/.cache/composer del usuario de docker si no esta ya establecida yla monta en /composer_cache dentro del contenedor
     -e COMPOSER_HOME=/composer \
-    -e COMPOSER_CACHE_DIR=//composer_cache \
+    -e COMPOSER_CACHE_DIR=/composer_cache \
     composer create-project symfony/skeleton .
 [[ $? -ne 0 ]] && exit 1
 
